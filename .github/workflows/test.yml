@@ -5,11 +5,6 @@ jobs:
   run-jest-tests:
     runs-on: ubuntu-20.04
     steps:
-      - name: Upload coverage reports to Codecov
-      uses: codecov/codecov-action@v3
-      env:
-        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-
       - name: Check out Git repository
         uses: actions/checkout@v2
 
@@ -23,6 +18,10 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
       - name: Run jest tests
         run: yarn run test
-
